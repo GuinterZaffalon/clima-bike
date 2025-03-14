@@ -23,7 +23,15 @@ class SearchCoordinates {
       final firstSearch = await http.get(searchFirstCity);
       final seccondSearch = await http.get(searchSeccondCity);
 
-      String resultFetchFirstCity = firstSearch.["features"]["geometry"]["coordinates"];
+      if (firstSearch.statusCode == 200 && seccondSearch.statusCode == 200){
+        final resultFetchFirstCity = jsonDecode(firstSearch.body);
+        final resultFetchSeccondCity = jsonDecode(seccondSearch.body);
+
+        return [resultFetchFirstCity["features"]["geometry"]["coordinates"], resultFetchSeccondCity["features"]["geometry"]["coordinates"]];
+      } else {
+        print ("erro na primeira busca: ${firstSearch.statusCode}");
+        return [];
+      }
     } catch (e) {
       return [];
     }
