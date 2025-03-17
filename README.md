@@ -1,16 +1,43 @@
-# flutterprojects
+# Clima Bike
 
-A new Flutter project.
+> Um aplicativo completo para planejar seus pedais! Utiliza Flutter como framework e SQLite como banco de dados.
+> Faz a integração com rotas de api para traçar a rota e o obter clima.
 
-## Getting Started
+## 📦 Instalação
 
-This project is a starting point for a Flutter application.
+Para instalar o Reading Tracker, siga estas etapas:
 
-A few resources to get you started if this is your first Flutter project:
+```
+flutter pub get
+flutter apk build --release
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📌 Desenvolvimento
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+O projeto está em desenvolvimento inicial, estes são os pontos a serem trabalhados até o lançamento:
+
+- [x] Arquitetura e escolha das APIs
+- [x] Integração com a API de busca por nome da cidade
+- [ ] Integrar o algoritmo de cálculo de cidade
+- [ ] Integrar a API de clima
+- [ ] Design geral
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+- Você instalou a versão `'>=3.4.1 <4.0.0' do Flutter`
+- Você tem uma máquina `Windows / Linux / Mac`
+- Você conhece o `git`
+
+## 📫 Contribuindo para <climabike>
+
+Para contribuir com <climabike>, siga estas etapas:
+
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <climabike>`.
+5. Crie a solicitação de pull.
+
+Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
