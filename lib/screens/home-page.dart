@@ -21,6 +21,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<String> cities = [];
   String distance = "";
   final TextEditingController firstCity = TextEditingController();
   final TextEditingController seccondCity = TextEditingController();
@@ -29,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final distanceFetched = await FetchCities.fetchCities(firstCity, seccondCity);
       final distanceCalculated = distanceFetched["distance"];
+      final citiesFetched = distanceFetched["cities"];
       if (distanceCalculated == "") {
         setState(() {
           distance = "";
@@ -36,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         setState(() {
           distance = distanceCalculated;
+          cities = citiesFetched;
         });
       }
     } catch (e) {
@@ -129,6 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.black,
                   fontSize: 20,
                 ),
+              ),
+            ) : Container(),
+            cities.isNotEmpty ? Padding(
+              padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
+              child: ListView(
+                children: cities.map((city) => Text(city)).toList(),
               ),
             ) : Container(),
           ],
