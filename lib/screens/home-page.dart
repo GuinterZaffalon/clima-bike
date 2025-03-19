@@ -22,6 +22,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int distance = 0;
+  final TextEditingController firstCity = TextEditingController();
+  final TextEditingController seccondCity = TextEditingController();
 
   Future<void> _getDistance(String firstCity, String seccondCity) async {
     final distanceFetched = await MountRoute.mountRoute(firstCity, seccondCity);
@@ -47,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Padding(padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child: TextField(
+                controller: firstCity,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -68,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Padding(padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                 child: TextField(
+                  controller: seccondCity,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
@@ -92,7 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _getDistance(firstCity.text, seccondCity.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.all(13),
@@ -104,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            distance == 0 ? Padding(
+            distance != 0 ? Padding(
               padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
               child: Text(
                 "Distância: $distance km",
