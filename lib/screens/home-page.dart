@@ -21,17 +21,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int distance = 0;
+  String distance = "";
   final TextEditingController firstCity = TextEditingController();
   final TextEditingController seccondCity = TextEditingController();
 
   Future<void> _getDistance(String firstCity, String seccondCity) async {
-    final distanceFetched = await MountRoute.mountRoute(firstCity, seccondCity);
-    final distanceCalculated = distanceFetched[1];
-
-    setState(() {
-      distance = distanceCalculated as int;
-    });
+    try {
+      final distanceFetched = await MountRoute.mountRoute(firstCity, seccondCity);
+      final distanceCalculated = distanceFetched;
+      if (distanceCalculated == "") {
+        setState(() {
+          distance = "";
+        });
+      } else {
+        setState(() {
+          distance = distanceCalculated;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        distance = "";
+      });
+    }
   }
 
   @override
@@ -110,10 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            distance != 0 ? Padding(
+            distance != "" ? Padding(
               padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
               child: Text(
-                "Distância: $distance km",
+                "Distância: $distance",
                 style: GoogleFonts.roboto(
                   color: Colors.black,
                   fontSize: 20,

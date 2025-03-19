@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SearchCoordinates {
-  static Future<List<String>> getCoordinates(String firstCity, String seccondCity) async {
+  static Future<List<List<double>>> getCoordinates(String firstCity, String seccondCity) async {
     const String baseUrl = "api.openrouteservice.org";
     const String path = "/geocode/search";
     const String apiKey = "5b3ce3597851110001cf624861c8eb00eb2f4ffc90c8b04710119ae1";
@@ -19,20 +19,28 @@ class SearchCoordinates {
       "text": seccondCity,
     });
 
-    try{
+    try {
       final firstSearch = await http.get(searchFirstCity);
       final seccondSearch = await http.get(searchSeccondCity);
 
-      if (firstSearch.statusCode == 200 && seccondSearch.statusCode == 200){
+      if (firstSearch.statusCode == 200 && seccondSearch.statusCode == 200) {
         final resultFetchFirstCity = jsonDecode(firstSearch.body);
         final resultFetchSeccondCity = jsonDecode(seccondSearch.body);
 
-        return [resultFetchFirstCity["features"]["geometry"]["coordinates"], resultFetchSeccondCity["features"]["geometry"]["coordinates"]];
+        if (resultFetchFirstCity["features"].isEmpty || resultFetchSeccondCity["features"].isEmpty) {
+          return [];
+        }
+
+        return [
+          List<double>.from(resultFetchFirstCity["features"][0]["geometry"]["coordinates"]),
+          List<double>.from(resultFetchSeccondCity["features"][0]["geometry"]["coordinates"])
+        ];
       } else {
-        print ("erro na primeira busca: ${firstSearch.statusCode}");
+        print("Erro na requisição: ${firstSearch.statusCode}, ${seccondSearch.statusCode}");
         return [];
       }
     } catch (e) {
+      print("Erro ao buscar coordenadas: $e");
       return [];
     }
   }
