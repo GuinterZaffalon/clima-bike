@@ -136,9 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ) : Container(),
             cities.isNotEmpty ? Padding(
               padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
-              child: ListView(
-                children: cities.map((city) => Text(city)).toList(),
-              ),
+              child: Text(
+                "Cidades: ${cities.join(", ")}",
+                style: GoogleFonts.roboto(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              )
             ) : Container(),
           ],
         )
