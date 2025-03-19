@@ -20,6 +20,7 @@ O projeto está em desenvolvimento inicial, estes são os pontos a serem trabalh
 - [x] Integração com a API de busca por nome da cidade
 - [ ] Integrar o algoritmo de cálculo de cidade
 - [ ] Integrar a API de clima
+- [x] Wireframe
 - [ ] Design geral
 
 ## 💻 Pré-requisitos
