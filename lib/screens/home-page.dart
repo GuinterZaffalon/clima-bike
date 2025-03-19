@@ -20,6 +20,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final int distance = 0;
+
+
 
   @override
   Widget build(BuildContext context) {
