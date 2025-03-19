@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprojects/service/mount-route.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,9 +21,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int distance = 0;
+  int distance = 0;
 
+  Future<void> _getDistance(String firstCity, String seccondCity) async {
+    final distanceFetched = await MountRoute.mountRoute(firstCity, seccondCity);
+    final distanceCalculated = distanceFetched[1];
 
+    setState(() {
+      distance = distanceCalculated as int;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +103,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text("Calcular", style: TextStyle(color: Colors.black),),
                 ),
               ),
-            )
+            ),
+            distance == 0 ? Padding(
+              padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
+              child: Text(
+                "Distância: $distance km",
+                style: GoogleFonts.roboto(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+            ) : Container(),
           ],
         )
       )
