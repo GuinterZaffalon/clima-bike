@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterprojects/service/mount-route.dart';
+import 'package:flutterprojects/service/fetch-cities.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatelessWidget {
@@ -27,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _getDistance(String firstCity, String seccondCity) async {
     try {
-      final distanceFetched = await MountRoute.mountRoute(firstCity, seccondCity);
-      final distanceCalculated = distanceFetched;
+      final distanceFetched = await FetchCities.fetchCities(firstCity, seccondCity);
+      final distanceCalculated = distanceFetched["distance"];
       if (distanceCalculated == "") {
         setState(() {
           distance = "";
