@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterprojects/screens/result-fetch.dart';
 import 'package:flutterprojects/service/fetch-cities.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,32 +22,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> cities = [];
-  String distance = "";
   final TextEditingController firstCity = TextEditingController();
   final TextEditingController seccondCity = TextEditingController();
-
-  Future<void> _getDistance(String firstCity, String seccondCity) async {
-    try {
-      final distanceFetched = await FetchCities.fetchCities(firstCity, seccondCity);
-      final distanceCalculated = distanceFetched["distance"];
-      final citiesFetched = distanceFetched["cities"];
-      if (distanceCalculated == "") {
-        setState(() {
-          distance = "";
-        });
-      } else {
-        setState(() {
-          distance = distanceCalculated;
-          cities = citiesFetched;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        distance = "";
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +88,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    _getDistance(firstCity.text, seccondCity.text);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResultFetch(
+                              resultParam: ResultParam(
+                                firstCity: firstCity.text,
+                                seccondCity: seccondCity.text
+                              ),
+                            )
+                        )
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -124,26 +111,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            distance != "" ? Padding(
-              padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
-              child: Text(
-                "Distância: $distance",
-                style: GoogleFonts.roboto(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-            ) : Container(),
-            cities.isNotEmpty ? Padding(
-              padding: const EdgeInsets.fromLTRB(10, 25, 10, 0),
-              child: Text(
-                "Cidades: ${cities.join(", ")}",
-                style: GoogleFonts.roboto(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              )
-            ) : Container(),
           ],
         )
       )

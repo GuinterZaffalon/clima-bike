@@ -4,7 +4,7 @@ import 'dart:convert';
 class CityCounter {
   static Future<List<String>> getCityCounter(List<List<double>> coordinaties) async {
     List<String> citiesFetch = [];
-    List<List<double>> waypoints = getCityNames(coordinaties, 40); // Agora retorna List<List<double>>
+    List<List<double>> waypoints = getCityNames(coordinaties, 90); // Agora retorna List<List<double>>
 
     for (var coord in waypoints) {
       double lat = coord[1];
