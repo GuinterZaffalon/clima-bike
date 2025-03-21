@@ -14,6 +14,8 @@ flutter apk build --release
 
 ## 📌 Desenvolvimento
 
+Novo servidor com docker para realizar o geocoding reverse!
+
 O projeto está em desenvolvimento inicial, estes são os pontos a serem trabalhados até o lançamento:
 
 - [x] Arquitetura e escolha das APIs
@@ -22,6 +24,7 @@ O projeto está em desenvolvimento inicial, estes são os pontos a serem trabalh
 - [ ] Integrar a API de clima
 - [x] Wireframe
 - [ ] Design geral
+- [ ] Docker para API de geocoding reverse
 
 ## 💻 Pré-requisitos
 
